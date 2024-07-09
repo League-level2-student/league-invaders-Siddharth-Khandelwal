@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class LeagueInvaders {
 	JFrame frame = new JFrame();
@@ -8,6 +9,7 @@ public class LeagueInvaders {
 
 	public LeagueInvaders() {
 		bob = new GamePanel();
+
 	}
 
 	public static void main(String[] args) {
