@@ -6,10 +6,11 @@ public class LeagueInvaders {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 800;
 	GamePanel bob;
+	
 
 	public LeagueInvaders() {
 		bob = new GamePanel();
-
+frame.addKeyListener(bob);
 	}
 
 	public static void main(String[] args) {
