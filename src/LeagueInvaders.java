@@ -6,11 +6,10 @@ public class LeagueInvaders {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 800;
 	GamePanel bob;
-	
 
 	public LeagueInvaders() {
 		bob = new GamePanel();
-frame.addKeyListener(bob);
+		frame.addKeyListener(bob);
 	}
 
 	public static void main(String[] args) {
@@ -24,6 +23,6 @@ frame.addKeyListener(bob);
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 	}
 }

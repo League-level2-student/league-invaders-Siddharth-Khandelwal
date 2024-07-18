@@ -15,6 +15,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END = 2;
 	int currentState = MENU;
 	Rocketship rock = new Rocketship(250, 700, 50, 50);
+	ObjectManager obj = new ObjectManager(rock);
 
 	public GamePanel() {
 		Timer frameDraw = frameDraw = new Timer(1000 / 60, this);
@@ -29,7 +30,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-
+obj.update();
 	}
 
 	void updateEndState() {
@@ -50,7 +51,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-		rock.draw(g);
+		obj.draw(g);
+		
 	}
 
 	void drawEndState(Graphics g) {
@@ -109,26 +111,39 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("UP");
-			rock.up();
+			rock.up = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			System.out.println("DOWN");
-			rock.down();
+			rock.down = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			System.out.println("LEFT");
-			rock.left();
+			rock.left = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			System.out.println("RIGHT");
-			rock.right();
+			rock.right = true;
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			rock.up = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			System.out.println("DOWN");
+			rock.down = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			System.out.println("LEFT");
+			rock.left = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			System.out.println("RIGHT");
+			rock.right = false;
+		}
 	}
 }
