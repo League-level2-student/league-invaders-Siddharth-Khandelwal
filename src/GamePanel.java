@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -18,6 +20,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int currentState = MENU;
 	Rocketship rock = new Rocketship(250, 700, 50, 50);
 	ObjectManager obj = new ObjectManager(rock);
+	JLabel label = new JLabel();
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
@@ -36,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	Font titleFont = new Font("Arial", Font.PLAIN, 48);
 	Font basicFont = new Font("Arial", Font.PLAIN, 24);
+	Font justforscore = new Font("Courier New", Font.PLAIN, 24);
 
 	void updateMenuState() {
 
@@ -61,6 +65,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(basicFont);
 		g.drawString("Press ENTER to start", 140, 300);
 		g.drawString("Press SPACE for instructions", 100, 450);
+		obj.score = 0;
 	}
 
 	void drawGameState(Graphics g) {
@@ -71,7 +76,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		}
 		obj.draw(g);
-
+		g.setFont(justforscore);
+		g.setColor(Color.GREEN);
+		g.drawString("Score: "+obj.getScore(), 50, 100);
+		
 
 	}
 	void drawEndState(Graphics g) {
@@ -81,7 +89,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.yellow);
 		g.drawString("Game Over", 125, 150);
 		g.setFont(basicFont);
-		g.drawString("You killed " + " enemies", 150, 300);
+		g.drawString("You killed " +obj.getScore()+ " enemies", 150, 300);
 		g.drawString("Press ENTER to restart", 125, 450);
 
 	}
@@ -111,7 +119,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			updateEndState();
 
 		}
-
+		
 		repaint();
 	}
 
@@ -126,6 +134,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
+				rock = new Rocketship(250, 700, 50, 50);
+				obj = new ObjectManager(rock);
 				currentState = MENU;
 			} else {
 				currentState++;
@@ -133,6 +143,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if(currentState == GAME) {
 				startGame();
 			}
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			rock.up = true;
@@ -151,6 +162,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			obj.addProjectile(rock.getProjectile());
+		}
+		if(e.getKeyCode() == KeyEvent.VK_SPACE&&currentState==MENU) {
+			JOptionPane.showMessageDialog(null, "Use arrow keys to move. Press SPACE to fire. Try not to die");
 		}
 	}
 

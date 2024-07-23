@@ -10,7 +10,7 @@ public class Alien extends GameObject {
 	public static boolean gotImage = false;	
 	public Alien(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 1;
+		speed = 6;
 		if (needImage) {
 		    loadImage ("alien (1).png");
 		}
@@ -22,6 +22,7 @@ public class Alien extends GameObject {
 			isActive = false;
 		}
 		super.update();
+		
 	}
 
 	public void draw(Graphics g) {
